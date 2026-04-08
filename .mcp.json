@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "blog": {
+      "command": "uv",
+      "args": ["run", "server.py"],
+      "cwd": "/Users/abel/projects/blog_mcp",
+      "env": {
+        "BLOG_API_TOKEN": "test",
+        "BLOG_API_BASE": "http://localhost:8000/api"
+      }
+    }
+  }
+}

@@ -16,7 +16,9 @@ uv sync
 
 ## Configuration
 
-Add to your Claude Code MCP config (`~/.claude/claude_desktop_config.json` or via `claude mcp add`):
+### Claude Code (terminal/IDE)
+
+Edit `.mcp.json` in the project root and set your token:
 
 ```json
 {
@@ -33,7 +35,13 @@ Add to your Claude Code MCP config (`~/.claude/claude_desktop_config.json` or vi
 }
 ```
 
-By default the server points to `https://abelcastro.dev/api`. To use a local dev server instead, add:
+### Claude Desktop app
+
+Add the same block to `~/.claude/claude_desktop_config.json` under `mcpServers`.
+
+---
+
+By default the server points to `https://abelcastro.dev/api`. To use a local dev server instead, add `BLOG_API_BASE` to `env`:
 
 ```json
 "BLOG_API_BASE": "http://localhost:8000/api"
