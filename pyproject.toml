@@ -1,0 +1,11 @@
+[project]
+name = "blog-mcp"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp[cli]",
+    "httpx",
+]
+
+[project.scripts]
+blog-mcp = "server:main"
