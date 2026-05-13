@@ -1,13 +1,14 @@
 import os
+from pathlib import Path
 
-from dotenv import load_dotenv
 import httpx
+from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
 
-load_dotenv()
+load_dotenv(Path(__file__).parent / ".env")
 
 API_TOKEN = os.environ["BLOG_API_TOKEN"]
-API_BASE = os.environ.get("BLOG_API_BASE", "https://abelcastro.dev/api")
+API_BASE = os.environ["BLOG_API_BASE"]
 
 mcp = FastMCP("blog")
 
@@ -16,11 +17,14 @@ mcp = FastMCP("blog")
 def create_draft_post(
     title: str,
     content: str,
+    slug: str | None = None,
     meta_description: str | None = None,
     tags: list[str] | None = None,
 ) -> dict:
-    """Create a draft blog post on abelcastro.dev."""
+    """Create a draft blog post on core.abelcastro.dev."""
     payload = {"title": title, "content": content, "tags": tags or []}
+    if slug:
+        payload["slug"] = slug
     if meta_description:
         payload["meta_description"] = meta_description
     response = httpx.post(
@@ -34,7 +38,7 @@ def create_draft_post(
 
 @mcp.tool()
 def list_posts(query: str | None = None) -> dict:
-    """List published posts on abelcastro.dev."""
+    """List published posts on core.abelcastro.dev."""
     params = {"query": query} if query else {}
     response = httpx.get(f"{API_BASE}/posts/", params=params)
     response.raise_for_status()

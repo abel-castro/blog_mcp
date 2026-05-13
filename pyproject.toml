@@ -5,6 +5,7 @@ requires-python = ">=3.11"
 dependencies = [
     "mcp[cli]",
     "httpx",
+    "python-dotenv",
 ]
 
 [project.scripts]

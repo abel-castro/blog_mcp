@@ -1,6 +1,6 @@
 # blog-mcp
 
-MCP server for [abelcastro.dev](https://abelcastro.dev). Exposes tools to create draft posts and list published posts directly from Claude.
+MCP server for [abelcastro.dev](https://core.abelcastro.dev). Exposes tools to create draft posts and list published posts directly from Claude.
 
 ## Requirements
 
@@ -16,9 +16,21 @@ uv sync
 
 ## Configuration
 
+Create a `.env` file in the project root:
+
+```bash
+BLOG_API_TOKEN="your-token-here"
+```
+
+Optionally, to use a local dev server instead of `https://core.abelcastro.dev/api`:
+
+```bash
+BLOG_API_BASE="http://localhost:8000/api"
+```
+
 ### Claude Code (terminal/IDE)
 
-Edit `.mcp.json` in the project root and set your token:
+Add to `.mcp.json` in the project root:
 
 ```json
 {
@@ -26,10 +38,7 @@ Edit `.mcp.json` in the project root and set your token:
     "blog": {
       "command": "uv",
       "args": ["run", "server.py"],
-      "cwd": "/absolute/path/to/blog-mcp",
-      "env": {
-        "BLOG_API_TOKEN": "your-token-here"
-      }
+      "cwd": "/absolute/path/to/blog-mcp"
     }
   }
 }
@@ -39,17 +48,9 @@ Edit `.mcp.json` in the project root and set your token:
 
 Add the same block to `~/.claude/claude_desktop_config.json` under `mcpServers`.
 
----
-
-By default the server points to `https://abelcastro.dev/api`. To use a local dev server instead, add `BLOG_API_BASE` to `env`:
-
-```json
-"BLOG_API_BASE": "http://localhost:8000/api"
-```
-
 ## Available tools
 
-| Tool | Description |
-|------|-------------|
+| Tool                                       | Description                                                                                                                                     |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | `create_draft_post(title, content, tags?)` | Creates a draft post. `content` is Markdown. `tags` is an optional list of strings. Returns the created post including its auto-generated slug. |
-| `list_posts(query?)` | Lists published posts. Optionally filter by a search term across title, content, and tags. |
+| `list_posts(query?)`                       | Lists published posts. Optionally filter by a search term across title, content, and tags.                                                      |
